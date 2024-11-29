@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { API_URL } from "../app/(home)/page";
 import styles from "../styles/movie-info.module.css";
-import Credit from "./movie-credi";
+import Credit from "./movie-credit";
 
 export async function getMovie(id: string) {
     const response = await fetch(`${API_URL}/${id}`);
@@ -45,7 +45,7 @@ export default async function MovieInfo({id} : {id: string}){
                     {provider ? <a href={provider.link}>Provider &rarr;</a>: null}
                 </div>
                 <a href={movie.homepage} target={"_blank"}>Homepage &rarr;</a>
-                <Link href={`.movies/${id}/similar`}>Similar Movies &rarr;</Link>
+                <Link href={`/movies/${id}/similar`}>Similar Movies &rarr;</Link>
             </div>
         </div>
     )
