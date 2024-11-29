@@ -3,12 +3,18 @@ import { getMovie } from "../../../../../components/movie-info";
 import styles from "../../../../../styles/movie-similar.module.css";
 import { API_URL } from "../../../../constants";
 
+type IParams = Promise<{
+    id: string;
+}>;
+
 async function getSimilarMovies(id: string){
     const response = await fetch(`${API_URL}/${id}/similar`);
     return response.json();
 }
 
-export default async function SimilarMovies({ params: { id }} : {params: { id: string }}){
+export default async function SimilarMovies(props: { params: IParams }) {
+    const params = await props.params;
+    const id = params.id;
     const original = await getMovie(id);
     const movies = await getSimilarMovies(id);
     return (
